@@ -18,6 +18,14 @@ type Person struct {
 	name string
 }
 
+func (p *Person) SetName(name string) {
+	p.name = name
+}
+
+func (p *Person) GetName() string {
+	return p.name
+}
+
 type Info struct {
 	from         *Person
 	relationship Relationship
@@ -42,16 +50,36 @@ func (r *Relationships) AddSibling(s1, s2 *Person) {
 // High-Level Module
 type Research struct {
 	// This breaks DIP as it depends on low-level module
-	relationships Relationships
+	//relationships Relationships
+
+	// abstraction to depend upon
+	browser RelationshipBrowser
+}
+
+type RelationshipBrowser interface {
+	FindAllChildrenOf(name string) []*Person
+}
+
+func (r *Relationships) FindAllChildrenOf(name string) []*Person {
+	result := make([]*Person, 0)
+
+	for _, relation := range r.relations {
+		if relation.from.name == name &&
+			relation.relationship == Parent {
+			result = append(result, relation.to)
+		}
+	}
+	return result
+}
+
+func NewResearch(relationships *Relationships) Research {
+	return Research{relationships}
 }
 
 func (r *Research) InvestigateParentToChild(name string) {
-	relations := r.relationships.relations
+	results := r.browser.FindAllChildrenOf(name)
 
-	for _, relation := range relations {
-		if relation.from.name == name &&
-			relation.relationship == Parent {
-			fmt.Printf("%s is a child of %s", relation.to.name, name)
-		}
+	for _, result := range results {
+		fmt.Printf("%s has a child named %s\n", name, result.name)
 	}
 }
