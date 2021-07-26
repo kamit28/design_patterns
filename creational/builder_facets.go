@@ -1,12 +1,5 @@
 package creational
 
-type Person struct {
-	StreetAddress, City, State, PostCode string
-
-	CompanyName, Position, Department string
-	AnnualIncome                      float32
-}
-
 type PersonBuilder struct {
 	person *Person
 }

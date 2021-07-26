@@ -9,14 +9,6 @@ import (
 	"github.com/asaskevich/govalidator"
 )
 
-type User struct {
-	name     string
-	age      int
-	email    string
-	password uint32
-	status   bool // will be defaulted to false, ans will be changed to true once email is verified
-}
-
 func NewUser(name string, age int, email string, password string) (*User, error) {
 	if age < 18 {
 		return nil, errors.New("user age restrictions apply. Required Age is 18+")

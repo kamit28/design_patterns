@@ -1,29 +1,5 @@
 package creational
 
-type PizzaSize int
-
-const (
-	Small PizzaSize = iota
-	Medium
-	Large
-)
-
-type PizzaBase int
-
-const (
-	Thin PizzaBase = iota
-	Traditional
-	DeepDish
-)
-
-type Pizza struct {
-	name     string
-	size     PizzaSize
-	base     PizzaBase
-	sauce    string
-	toppings []string
-}
-
 type pizzaMod func(*Pizza)
 
 type PizzaBuilder struct {
