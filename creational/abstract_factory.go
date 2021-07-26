@@ -1,5 +1,10 @@
 package creational
 
+type Contractor struct {
+	Name, Position string
+	DayRate        int
+}
+
 // functional way
 func NewContractorFactory(position string, dayRate int) func(name string) *Contractor {
 	return func(name string) *Contractor {

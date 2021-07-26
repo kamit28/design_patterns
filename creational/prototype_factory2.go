@@ -5,6 +5,25 @@ import (
 	"encoding/gob"
 )
 
+type Candidate struct {
+	Name         string
+	Party        PartyName
+	Constituency Constituency
+}
+
+type PartyName int
+
+const (
+	Labour PartyName = iota
+	Liberal
+	Greens
+)
+
+type Constituency struct {
+	Name  string
+	State string
+}
+
 func (c *Candidate) DeepCopy() *Candidate {
 	b := bytes.Buffer{}
 	e := gob.NewEncoder(&b)

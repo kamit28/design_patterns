@@ -5,6 +5,25 @@ import (
 	"encoding/gob"
 )
 
+type OrderItem struct {
+	ItemName string
+	Price    float32
+	Quantity int
+}
+
+// Address type
+type Address struct {
+	Street, City, PostCode string
+}
+
+// Order type
+type Order struct {
+	Name            string
+	OrderTotal      float32
+	Items           []OrderItem
+	ShippingAddress *Address
+}
+
 func (a *Address) DeepCopy() *Address {
 	return &Address{
 		a.Street,

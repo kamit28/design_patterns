@@ -4,6 +4,19 @@ import (
 	"fmt"
 )
 
+type RoleType int
+
+const (
+	Developer RoleType = iota
+	Manager
+)
+
+type Employee struct {
+	Name         string
+	Role         RoleType
+	AnnualIncome int
+}
+
 func NewEmployee(role RoleType) (*Employee, error) {
 	switch role {
 	case Developer:
