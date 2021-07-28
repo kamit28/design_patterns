@@ -5,14 +5,16 @@ import (
 
 	"github.com/kamit28/design_patterns/creational"
 	"github.com/kamit28/design_patterns/gof"
+	"github.com/kamit28/design_patterns/structural"
 )
 
 func main() {
-	TestDependencyInversion()
-	TestBuilder()
-	TestBuilderFacets()
-	TestFunctionalBuilder()
-	TestFactoryMethod()
+	//TestDependencyInversion()
+	//TestBuilder()
+	//TestBuilderFacets()
+	//TestFunctionalBuilder()
+	//TestFactoryMethod()
+	TestVestorToRaster()
 }
 
 func TestDependencyInversion() {
@@ -81,4 +83,11 @@ func TestFactoryMethod() {
 		panic(err)
 	}
 	fmt.Println(user)
+}
+
+func TestVestorToRaster() {
+	rc := structural.NewRectangele(4, 4)
+	a := structural.VectorToRaster(rc)
+	_ = structural.VectorToRaster(rc)
+	fmt.Print(structural.DrawPoints(a))
 }
