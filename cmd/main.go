@@ -14,7 +14,9 @@ func main() {
 	//TestBuilderFacets()
 	//TestFunctionalBuilder()
 	//TestFactoryMethod()
-	TestVestorToRaster()
+	//TestVestorToRaster()
+	//TestBridge()
+	TestDecorator()
 }
 
 func TestDependencyInversion() {
@@ -90,4 +92,33 @@ func TestVestorToRaster() {
 	a := structural.VectorToRaster(rc)
 	_ = structural.VectorToRaster(rc)
 	fmt.Print(structural.DrawPoints(a))
+}
+
+func TestBridge() {
+	b := structural.BuyOrder{OrderDirection: structural.Buy}
+	s := structural.SellOrder{OrderDirection: structural.Sell}
+
+	m := structural.NewOrder(&b, "IBM", 50)
+	m.PlaceOrder()
+
+	l := structural.NewLimitOrder(&s, "RIL", 1000, 45.06)
+	l.PlaceOrder()
+}
+
+func TestDecorator() {
+	d := structural.NewFileDataSource("myfile.dat")
+	//d.WriteData("Hello, how are you")
+	//data := d.ReadData()
+
+	//fmt.Println(data)
+
+	encDS := structural.NewEncryptionDecorator(d)
+	//encDS.WriteData("This is some 30 bytes of data.")
+	//data := encDS.ReadData()
+
+	comressDS := structural.NewCompressionDecorator(encDS)
+	comressDS.WriteData("Here is some data to compress")
+	data := comressDS.ReadData()
+
+	fmt.Println(data)
 }
